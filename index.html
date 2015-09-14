@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <meta charset="utf-8" />
+            <title>js工具集合演示页面</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    <div class="col-sm-offset-1">
+        <h2>表单验证:</h2>
+    </div>
+    
+    <form class="form-horizontal" role="form">
+       <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">邮箱</label>
+          <div class="col-sm-6">
+             <input type="text" class="form-control" id="email" >
+          </div>
+          <p id="error_email" class="form_error"></p>
+       </div>
+       <div class="form-group">
+          <label for="phone" class="col-sm-2 control-label">电话</label>
+          <div class="col-sm-6">
+             <input type="text" class="form-control" id="phone" >
+          </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-6">
+             <div class="checkbox">
+                <label>
+                   <input type="checkbox"> 请记住我
+                </label>
+             </div>
+          </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+             <button type="submit" class="btn btn-default">登录</button>
+          </div>
+       </div>
+    </form>
+
+    <script src="node_modules/seajs/dist/sea.js"></script>
+    <script>
+      // Set configuration
+      seajs.config({
+        base: "./",
+        alias: {
+          "jquery": "vendors/jquery.js",
+        }
+      });
+      seajs.use("./main.js");
+    </script>
+    
+</body>
+
+
+</html>
