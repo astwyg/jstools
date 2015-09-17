@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-            <meta charset="utf-8" />
-            <title>js工具集合演示页面</title>
+    <meta charset="utf-8" />
+    <title>js工具集合演示页面</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
@@ -18,9 +18,9 @@
        <div class="form-group">
           <label for="email" class="col-sm-2 control-label">邮箱</label>
           <div class="col-sm-6">
-             <input type="text" class="form-control" id="email" >
+             <input type="text" class="form-control form-needed" id="email" >
           </div>
-          <p id="error_email" class="form_error"></p>
+          <p id="error-email" class="form-error"></p>
        </div>
        <div class="form-group">
           <label for="phone" class="col-sm-2 control-label">电话</label>
@@ -28,18 +28,39 @@
              <input type="text" class="form-control" id="phone" >
           </div>
        </div>
+       
        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-6">
-             <div class="checkbox">
-                <label>
-                   <input type="checkbox"> 请记住我
-                </label>
-             </div>
+          <label for="checkbox" class="col-sm-2 control-label">复选框</label>
+          <div class="col-sm-6 form-needed" id="checkbox">
+            <label class="checkbox-inline">
+              <input type="checkbox" id="Checkbox1" value="option1"> 选项 1
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" id="Checkbox2" value="option2"> 选项 2
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" id="Checkbox3" value="option3"> 选项 3
+            </label>
+            <p id="error-checkbox" class="form-error"><p>
           </div>
        </div>
        <div class="form-group">
+            <label for"radio" class="col-sm-2 control-label">单选按钮</label>
+            <div class="col-sm-6 form-needed" id="radio">
+               <label class="checkbox-inline">
+                  <input type="radio" name="optionsRadiosinline" id="optionsRadios3" 
+                     value="option1"> 选项 1
+               </label>
+               <label class="checkbox-inline">
+                  <input type="radio" name="optionsRadiosinline" id="optionsRadios4" 
+                     value="option2"> 选项 2
+               </label>
+               <p id="error-radio" class="form-error"><p>
+            </div>
+       </div>
+       <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-             <button type="submit" class="btn btn-default">登录</button>
+             <button type="submit" class="btn btn-default">验证</button>
           </div>
        </div>
     </form>

@@ -16,7 +16,7 @@ define(function (require, exports, module) {
 	 * @param  {object} expected  如果输入为正则表达式, 则按照正则表达式进行验证, 如果传入数组, 则参考下面例子:
 	 * 		1) []:执行fail函数
 	 * 		2) ["noEmpty"]: 不为空
-	 * 		3) ["int","2-5"]:检查是否为2-5位数字, 同类的还有"string"
+	 * 		3) ["int","2-5"]:检查是否为2-5位数字(包含2和5), 同类的还有"string"
 	 * 		4) ["ajax","ok","api/xxx",{username:"#username"}]: 发POST请求, 如果没有第四个参数则发送GET, 结果和第二参数做比较, 如果不符, 执行fail, 否则执行success.
 	 * 		5) ["select","-"]: 这个比较特殊, 只能加在select元素上, 如果on select的value包括"-", 执行fail, 一般select都会设计成第一个是"--请选择--", 其他的不包括"-", 以此判断用户是否做出了选择.
 	 * 		6) 其他情况可看名字猜意思.
@@ -47,7 +47,9 @@ define(function (require, exports, module) {
 				expectedLenMin = expectedLenSplit[0];
 				expectedLenMax = expectedLenSplit[1];
 			}
-			if(str.length>expectedLenMax || str.length<expectedLenMin)
+			if(typeof str=="string")
+				str = str.length;
+			if(str>expectedLenMax || str<expectedLenMin)
 				return false;
 			else
 				return true;
@@ -131,6 +133,14 @@ define(function (require, exports, module) {
 							var initPattern = expected[1]||"-";
 							flag = (selectValue.indexOf(initPattern)<0);
 							break;
+						case "checkbox": //checkbox and radio
+							var checkedNum = 0;
+							$(self.selector + "  input[type='checkbox']").each(function(){
+								if($(this).is(':checked'))
+									checkedNum ++;
+							});
+							flag = expected[1]=="noEmpty" ? !(checkedNum==0) : checkSum(checkedNum,expected[1])
+							break;
 						case "ajax": //expected=["ajax","true","/api/xxx",{username:xxxx}]
 							if(expected.length==3){
 								window.DOMCheckFailed[self.selector+"|"+expected]="pending";
@@ -164,7 +174,7 @@ define(function (require, exports, module) {
 	 * @return {bool}              返回true为通过检查
 	 */
 	$.fn.submitValid = function(neededClass, wrongClass){
-		var _this = this;
+		var self = this;
 		var hasError = false;
 		$(this.selector).on("click",function(){
 			$(neededClass).each(function(index,element){
@@ -176,6 +186,9 @@ define(function (require, exports, module) {
 					case "SELECT":
 						var target = $("#" + $(this)[0].id + " option:selected");
 						target.trigger("change");
+						break;
+					case "DIV": //for ckeckbox and radio group
+						$(this).trigger("click");
 						break;
 				}
 				
